@@ -20,7 +20,7 @@ const EmailMessage = async (UserEmail) => {
         },
     });
     const Option = {
-        from: 'Kuang:'+ process.env.EMAIL_USER +'',
+        from: 'KuangWick:'+ process.env.EMAIL_USER +'',
         to: UserEmail,
         subject: "Account Creation",
         text: "Your account has been Successfully Created",

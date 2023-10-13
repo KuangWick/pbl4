@@ -59,8 +59,6 @@ class UserActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
 
-
-
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeId -> {
@@ -87,8 +85,6 @@ class UserActivity : AppCompatActivity() {
                     setFragment(faculity)
                     return@setOnNavigationItemSelectedListener true
                 }
-
-
                 else -> {
                     return@setOnNavigationItemSelectedListener false
                 }
@@ -96,35 +92,43 @@ class UserActivity : AppCompatActivity() {
         }
         navigation.setNavigationItemSelectedListener { item ->
 
-            when(item.itemId){
+            when (item.itemId) {
                 R.id.homes -> {
                     setTemp(navHome)
-                    supportFragmentManager.beginTransaction().replace(R.id.container, navHome()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.container, navHome())
+                        .commit()
                     navigation.setCheckedItem(R.id.homes)
                     drawerLayout.closeDrawer(GravityCompat.START)
                     return@setNavigationItemSelectedListener true
                 }
+
                 R.id.adds -> {
                     setTemp(addSv)
-                    supportFragmentManager.beginTransaction().replace(R.id.container, AddSv()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.container, AddSv())
+                        .commit()
                     navigation.setCheckedItem(R.id.adds)
                     drawerLayout.closeDrawer(GravityCompat.START)
                     return@setNavigationItemSelectedListener true
                 }
-                R.id.detail ->{
+
+                R.id.detail -> {
                     setTemp(details)
-                    supportFragmentManager.beginTransaction().replace(R.id.container, Details()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.container, Details())
+                        .commit()
                     navigation.setCheckedItem(R.id.detail)
                     drawerLayout.closeDrawer(GravityCompat.START)
                     return@setNavigationItemSelectedListener true
                 }
+
                 R.id.studentMn -> {
                     setTemp(studentMn)
-                    supportFragmentManager.beginTransaction().replace(R.id.container, StudentMn()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.container, StudentMn())
+                        .commit()
                     navigation.setCheckedItem(R.id.studentMn)
                     drawerLayout.closeDrawer(GravityCompat.START)
                     return@setNavigationItemSelectedListener true
                 }
+
                 R.id.logout -> {
                     logOut()
                     return@setNavigationItemSelectedListener true
@@ -138,10 +142,9 @@ class UserActivity : AppCompatActivity() {
         }
 
 
-
     }
 
-    fun logOut(){
+    fun logOut() {
         startActivity(Intent(this@UserActivity, MainActivity::class.java))
     }
 
@@ -150,7 +153,8 @@ class UserActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.container, fragment)
         fragmentTransaction.commit()
     }
-    fun setTemp(temp: Fragment){
+
+    fun setTemp(temp: Fragment) {
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, temp)
         fragmentTransaction.commit()

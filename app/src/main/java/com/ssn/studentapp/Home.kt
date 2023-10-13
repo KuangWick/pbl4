@@ -1,10 +1,15 @@
 package com.ssn.studentapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.card.MaterialCardView
+import com.ssn.studentapp.firebase.UploadEbook
+import com.ssn.studentapp.firebase.UploadImage
+import com.ssn.studentapp.firebase.UploadNotice
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,8 +26,17 @@ class Home : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var materialCard1: MaterialCardView
+    private lateinit var uploadNotice: UploadNotice
+    private lateinit var materialCard2: MaterialCardView
+    private lateinit var materialCard3: MaterialCardView
+    private lateinit var uploadImage: UploadImage
+    private lateinit var uploadEbook: UploadEbook
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        uploadNotice = UploadNotice()
+        uploadImage = UploadImage()
+        uploadEbook = UploadEbook()
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -33,8 +47,30 @@ class Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        materialCard1 = view.findViewById(R.id.btnNotice)
+        materialCard1.setOnClickListener {
+            val fragmentTransaction: FragmentTransaction =
+                activity?.supportFragmentManager!!.beginTransaction()
+            fragmentTransaction.replace(R.id.container, uploadNotice)
+            fragmentTransaction.commit()
+        }
+        materialCard2 = view.findViewById(R.id.btnGalleryImage)
+        materialCard2.setOnClickListener {
+            val fragmentTransaction: FragmentTransaction =
+                activity?.supportFragmentManager!!.beginTransaction()
+            fragmentTransaction.replace(R.id.container, uploadImage)
+            fragmentTransaction.commit()
+        }
+        materialCard3 = view.findViewById(R.id.btnEbook)
+        materialCard3.setOnClickListener {
+            val fragmentTransaction: FragmentTransaction =
+                activity?.supportFragmentManager!!.beginTransaction()
+            fragmentTransaction.replace(R.id.container, uploadEbook)
+            fragmentTransaction.commit()
+        }
+        return view
     }
 
     companion object {

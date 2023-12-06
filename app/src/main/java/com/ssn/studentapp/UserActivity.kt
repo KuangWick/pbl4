@@ -2,6 +2,7 @@ package com.ssn.studentapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -11,15 +12,27 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.ssn.studentapp.fragment.AddSv
+import com.ssn.studentapp.fragment.Book
+import com.ssn.studentapp.fragment.Class
+import com.ssn.studentapp.fragment.Details
+import com.ssn.studentapp.fragment.Faculty
+import com.ssn.studentapp.fragment.Home
+import com.ssn.studentapp.fragment.Language
+import com.ssn.studentapp.fragment.School
+import com.ssn.studentapp.fragment.Student
+import com.ssn.studentapp.fragment.StudentMn
+import com.ssn.studentapp.fragment.navHome
 
 
 class UserActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var school: School
     private lateinit var home: Home
     private lateinit var book: Book
-    private lateinit var faculity: Faculity
+    private lateinit var faculty: Faculty
     private lateinit var clazz: Class
     private lateinit var student: Student
 
@@ -30,19 +43,23 @@ class UserActivity : AppCompatActivity() {
     private lateinit var addSv: AddSv
     private lateinit var details: Details
     private lateinit var studentMn: StudentMn
+    private lateinit var username: TextView
+    private lateinit var language: Language
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        school = School()
         home = Home()
         book = Book()
-        faculity = Faculity()
+        faculty = Faculty()
         clazz = Class()
         student = Student()
         navHome = navHome()
         studentMn = StudentMn()
         details = Details()
         addSv = AddSv()
+        language = Language()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
@@ -51,8 +68,12 @@ class UserActivity : AppCompatActivity() {
         navigation = findViewById(R.id.navigationId)
         drawerLayout = findViewById(R.id.drawyer)
         bottomNavigationView = findViewById(R.id.bottomMenu)
+        val headerView = navigation.getHeaderView(0)
+        username = headerView.findViewById(R.id.tvFirstName)
+        username.text = "Admin!"
         toolbar.title = "StudentApp"
-        setFragment(home)
+
+        setFragment(student)
         actionBarDrawerToggle = ActionBarDrawerToggle(
             this@UserActivity, drawerLayout, toolbar, R.string.open, R.string.close
         )
@@ -61,11 +82,6 @@ class UserActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.homeId -> {
-                    setFragment(home)
-                    return@setOnNavigationItemSelectedListener true
-                }
-
                 R.id.studentId -> {
                     setFragment(student)
                     return@setOnNavigationItemSelectedListener true
@@ -81,10 +97,17 @@ class UserActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.faculityId -> {
-                    setFragment(faculity)
+                R.id.facultyId -> {
+                    setFragment(faculty)
                     return@setOnNavigationItemSelectedListener true
                 }
+
+                R.id.schoolId -> {
+                    setFragment(school)
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+
                 else -> {
                     return@setOnNavigationItemSelectedListener false
                 }
@@ -101,6 +124,16 @@ class UserActivity : AppCompatActivity() {
                     drawerLayout.closeDrawer(GravityCompat.START)
                     return@setNavigationItemSelectedListener true
                 }
+
+                R.id.homeId -> {
+                    setFragment(home)
+                    supportFragmentManager.beginTransaction().replace(R.id.container, Home())
+                        .commit()
+                    navigation.setCheckedItem(R.id.homeId)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    return@setNavigationItemSelectedListener true
+                }
+
 
                 R.id.adds -> {
                     setTemp(addSv)
@@ -125,6 +158,15 @@ class UserActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.container, StudentMn())
                         .commit()
                     navigation.setCheckedItem(R.id.studentMn)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    return@setNavigationItemSelectedListener true
+                }
+
+                R.id.language -> {
+                    setTemp(language)
+                    supportFragmentManager.beginTransaction().replace(R.id.container, Language())
+                        .commit()
+                    navigation.setCheckedItem(R.id.language)
                     drawerLayout.closeDrawer(GravityCompat.START)
                     return@setNavigationItemSelectedListener true
                 }

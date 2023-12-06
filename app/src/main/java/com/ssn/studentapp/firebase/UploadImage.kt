@@ -33,7 +33,8 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.UploadTask.TaskSnapshot
 import com.ssn.studentapp.R
-import com.ssn.studentapp.navHome
+import com.ssn.studentapp.firebase.notice.NoticeData
+import com.ssn.studentapp.fragment.navHome
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 

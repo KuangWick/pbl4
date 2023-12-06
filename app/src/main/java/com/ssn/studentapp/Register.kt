@@ -60,6 +60,9 @@ class Register : AppCompatActivity(), OnClickListener {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 try {
                     val body: String? = response.body()?.string()
+                    if (response.isSuccessful){
+                        startActivity(Intent(this@Register, MainActivity::class.java))
+                    }
                     Toast.makeText(this@Register, body, Toast.LENGTH_LONG).show()
                 } catch (e: IOException) {
                     e.printStackTrace()

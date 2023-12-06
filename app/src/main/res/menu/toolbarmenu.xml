@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Trang chủ"
-        android:id="@+id/homeId"
-        android:icon="@drawable/ic_home" />
     <item android:title="Sinh viên"
         android:id="@+id/studentId"
         android:icon="@drawable/ic_student" />
@@ -13,9 +10,12 @@
     <item android:title="Môn học"
         android:id="@+id/bookId"
         android:icon="@drawable/library_book" />
-    <item android:title="Khoá học"
-        android:id="@+id/faculityId"
+    <item android:title="Khoa học"
+        android:id="@+id/facultyId"
         android:icon="@drawable/falculity_ic" />
+    <item android:title="Trường Học"
+        android:id="@+id/schoolId"
+        android:icon="@drawable/school_ic" />
 
 
 </menu>
